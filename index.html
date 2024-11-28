@@ -891,12 +891,34 @@ h1:hover {
         background-image: linear-gradient(to right, #7F00FF, #E100FF);
     }
   }
+  
+  .btn {
+  background: #734f96;
+  border-radius: 999px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  }
 </style>
 </head>
 
 <body id="body" class="dark" oncontextmenu="return false">
      <!-- <div class="loader" id="loader">
-          <h1 data-value="OreO" id="loader-text">Created by OreO</h1>
+          <h1 data-value="OreO" id="loader-text">Created by Rasel</h1>
      </div> -->
      <div id="particles-js"></div>
 <script>
@@ -1921,8 +1943,9 @@ var pJS = function (e, a) {
                          <div class="about-container">
                               <h3 class="title">About</h3>
                               <p class="text">✦ Class: 12 | College: BMSC ✦</p>
-                              <p class="text">~ Dᴇᴠ ~</p>
+                              <p class="text">✦ Dᴇᴠ ✦</p>
                               <p class="text">• Pʏᴛʜᴏɴ | JᴧᴠᴧSᴄʀɪᴘᴛ | Hᴛᴍʟ | Css •</p>
+                              <p class="text" id="result">✦ Play to join a Station ✦</p>
                          </div>
                          <div class="icons-container">
                               <a href="https://www.facebook.com/RaselEdit" class="icon">
@@ -1937,6 +1960,7 @@ var pJS = function (e, a) {
                               <a href="https://www.youtube.com/@AMRaselOfficial" class="icon">
                                    <i class="fa-brands fa-youtube"></i>
                               </a>
+                              <button class="btn" id="playButton">Play</button>
                          </div>
                          <div class="buttons-wrap">
                               <div class="follow-wrap">
@@ -1950,7 +1974,52 @@ var pJS = function (e, a) {
                </div>
           </div>
      </div>
+<audio id="audioPlayer" src="audio.mp3" loop="loop"></audio>
+<script>
+    const playButton = document.getElementById('playButton');
+    const audioPlayer = document.getElementById('audioPlayer');
 
+    playButton.addEventListener('click', () => {
+        // Ensure the audio metadata is loaded before trying to set a random time
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            // Get the duration of the audio
+            const duration = audioPlayer.duration;
+
+            // Generate a random time between 0 and the duration of the audio
+            const randomTime = Math.random() * duration;
+
+            // Set the current playback time to the random time
+            audioPlayer.currentTime = randomTime;
+
+            // Play the audio
+            audioPlayer.play().catch(error => {
+                console.error('Audio playback failed:', error);
+            });
+        });
+
+        // Load the audio (if not already loaded)
+        if (audioPlayer.readyState < 2) {
+            audioPlayer.load();
+        } else {
+            // If already loaded, directly play from a random timeline
+            const randomTime = Math.random() * audioPlayer.duration;
+            audioPlayer.currentTime = randomTime;
+            audioPlayer.play().catch(error => {
+                console.error('Audio playback failed:', error);
+            });
+        }
+    });
+</script>
+<script>
+    const button = document.getElementById('playButton');
+    const result = document.getElementById('result');
+
+    button.addEventListener('click', () => {
+        // Generate a random 4-digit number
+        const randomNumber = Math.floor(1000 + Math.random() * 9000);
+        result.textContent = `✦ Your Station is: ${randomNumber} ✦`;
+    });
+</script>
      <script>
           document.onkeydown = function (e) {
                if (event.keyCode == 123) {
